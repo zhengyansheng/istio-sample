@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: helloworld-internal
+  namespace: ops
+spec:
+  #gateways:
+  #- helloworld-gateway
+  hosts:
+  - helloworld
+  - helloworld.example.com
+  http:
+    - match:
+        - headers:
+            end-user:
+              exact: jason
+      route:
+        - destination:
+            host: helloworld.ops.svc.cluster.local
+            subset: v2
+    - route:
+        - destination:
+            host: helloworld.ops.svc.cluster.local
+            subset: v1

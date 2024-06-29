@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: helloworld
+    service: helloworld
+  name: helloworld
+  namespace: ops
+spec:
+  clusterIP: 10.96.98.200
+  clusterIPs:
+  - 10.96.98.200
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 5000
+  selector:
+    app: helloworld
